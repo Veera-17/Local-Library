@@ -48,6 +48,9 @@ class Book(models.Model):
     # Genre class has already been defined so we can specify the object above.
     genre = models.ManyToManyField(
         Genre, help_text="Select a genre for this book")
+    
+    language = models.ManyToManyField(
+        'Language',on_delete=models.PROTECT, help_text="Select a Language for this book")
 
     def __str__(self):
         """String for representing the Model object."""
@@ -114,7 +117,7 @@ class Language(models.Model):
     language = models.CharField(
         max_length=200,
         unique=True,
-        help_text="Enter a book genre (e.g. Science Fiction, French Poetry etc.)"
+        help_text="Enter a book Language (e.g. Tamil, English, German, etc..)"
     )
 
     def __str__(self):
@@ -126,6 +129,6 @@ class Language(models.Model):
             UniqueConstraint(
                 Lower('language'),
                 name='language_name_case_insensitive_unique',
-                violation_error_message = "Genre already exists (case insensitive match)"
+                violation_error_message = "Language already exists (case insensitive match)"
             ),
         ]
