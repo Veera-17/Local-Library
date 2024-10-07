@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Book, Author, BookInstance, Genre
 from django.views import generic
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 def index(request):
     """View function for home page of site."""
@@ -76,4 +76,15 @@ class LoanedBooksByUserListView(LoginRequiredMixin,generic.ListView):
             BookInstance.objects.filter(borrower=self.request.user)
             .filter(status__exact='o')
             .order_by('due_back')
+        )
+        
+class AllBorrowedBooksView(PermissionRequiredMixin, generic.ListView):
+    model = BookInstance
+    permission_required = ('catlog.can_mark_returned',)
+    template_name = 'catlog/all_borrowed_books.html'
+    context_object_name = 'bookinstance_list'
+    
+    def get_queryset(self):
+        return(
+            BookInstance.objects.filter(status__exact='o').order_by('due_back')
         )

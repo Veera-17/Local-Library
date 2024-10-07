@@ -41,6 +41,11 @@
               {% else %}
               <li><a href="{% url 'login' %}?next={% url 'my-borrowed' %}">Login</a></li>
               {% endif %}
+
+              {% if perms.catlog.can_mark_returned %}
+                <li>Staff Login</li>
+                <li><a href="{% url 'all-borrowed-books' %}">All Borrowed</a></li>
+              {% endif %}
             </ul>
           {% endblock %}
         </div>
