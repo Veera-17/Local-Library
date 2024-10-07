@@ -23,4 +23,7 @@
     <li><strong>Number of Geners:</strong> {{ num_genre }}</li>
     <li><strong>Number of Books contains 'C':</strong> {{ num_book_contains_c }}</li>
   </ul>
+  <p>
+    You have visited this page {{ num_visit }} time{{ num_visit|pluralize }}.
+  </p>
 {% endblock %}
