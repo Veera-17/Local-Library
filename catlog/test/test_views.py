@@ -306,7 +306,7 @@ class AuthorCreateViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(str(response.context['user']), 'testuser')
         
-    def test_to_redrect_create_author_view(self):
+    def test_to_check_template_is_render(self):
         login = self.client.login(username='testuser', password='1X<ISRUkw+tuK')
         self.assertTrue(login)
         response = self.client.get(reverse('author-create'), follow=True)
