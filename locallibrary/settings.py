@@ -32,8 +32,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-2n_-%ciqhqmga-
 # DEBUG = True
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
-ALLOWED_HOSTS = ['https://veera17.pythonanywhere.com/', '127.0.0.1']
-
+ALLOWED_HOSTS = ['veera17.pythonanywhere.com', '127.0.0.1']
 CSRF_TRUSTED_ORIGINS = ['https://veera17.pythonanywhere.com']
 
 
