@@ -137,19 +137,19 @@ class AuthorCreate(PermissionRequiredMixin, CreateView):
     model = Author
     fields = ['first_name', 'last_name', 'date_of_birth', 'date_of_death']
     initial = {'date_of_death': '11/11/2023'}
-    permission_required = 'catalog.add_author'
+    permission_required = ('catlog.staff_user',)
 
 class AuthorUpdate(PermissionRequiredMixin, UpdateView):
     model = Author
     # Not recommended (potential security issue if more fields added)
     fields = '__all__'
-    permission_required = 'catalog.change_author'
+    permission_required = ('catlog.staff_user',)
 
 class AuthorDelete(PermissionRequiredMixin, DeleteView):
     model = Author
     success_url = reverse_lazy('authors')
-    permission_required = 'catalog.delete_author'
-
+    permission_required = ('catlog.staff_user',)
+    
     def form_valid(self, form):
         try:
             self.object.delete()
@@ -163,17 +163,17 @@ class AuthorDelete(PermissionRequiredMixin, DeleteView):
 class BookCreate(PermissionRequiredMixin, CreateView):
     model = Book
     fields = '__all__'
-    permission_required = 'catalog.add_book'
+    permission_required = ('catlog.staff_user',)
 
 class BookUpdate(PermissionRequiredMixin, UpdateView):
     model = Book
     fields = '__all__'
-    permission_required = 'catalog.change_book'
+    permission_required = ('catlog.staff_user',)
 
 class BookDelete(PermissionRequiredMixin, DeleteView):
     model = Book
     success_url = reverse_lazy('books')
-    permission_required = 'catalog.delete_book'
+    permission_required = ('catlog.staff_user',)
 
     def form_valid(self, form):
         try:

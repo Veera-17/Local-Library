@@ -26,13 +26,11 @@
 {% block sidebar %}
   {{ block.super }}
 
-  {% if perms.catalog.change_author or perms.catalog.delete_author %}
+  {% if perms.catlog.staff_user %}
   <hr>
   <ul class="sidebar-nav">
-    {% if perms.catalog.change_author %}
+    {% if perms.catlog.staff_user %}
       <li><a href="{% url 'author-update' author.id %}">Update author</a></li>
-    {% endif %}
-    {% if perms.catalog.delete_author %}
       <li><a href="{% url 'author-delete' author.id %}">Delete author</a></li>
     {% endif %}
     </ul>

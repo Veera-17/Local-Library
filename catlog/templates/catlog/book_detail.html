@@ -36,15 +36,11 @@
 {% block sidebar %}
   {{ block.super }}
 
-  {% if perms.catalog.change_book or perms.catalog.delete_book %}
+  {% if perms.catlog.staff_user%}
   <hr>
   <ul class="sidebar-nav">
-    {% if perms.catalog.change_book %}
       <li><a href="{% url 'book-update' book.id %}">Update Book</a></li>
-    {% endif %}
-    {% if perms.catalog.delete_book %}
       <li><a href="{% url 'book-delete' book.id %}">Delete Book</a></li>
-    {% endif %}
     </ul>
   {% endif %}
 

@@ -47,12 +47,9 @@
                 <li><a href="{% url 'all-borrowed-books' %}">All Borrowed</a></li>
               {% endif %}
 
-              {% if perms.catalog.add_author %}
-                <li><a href="{% url 'author-create' %}">Create author</a></li>
-              {% endif %}
-
-              {% if perms.catalog.add_book %}
-                <li><a href="{% url 'book-create' %}">Create Book</a></li>
+              {% if perms.catlog.staff_user %}
+              <li><a href="{% url 'author-create' %}">Create author</a></li>
+              <li><a href="{% url 'book-create' %}">Create Book</a></li>
               {% endif %}
             </ul>
           {% endblock %}

@@ -285,3 +285,30 @@ class RenewBookInstancesViewTest(TestCase):
         self.assertFormError(response.context['form'], 'due_back', 'Invalid date - renewal more than 4 weeks ahead')
 
     
+class AuthorCreateViewTest(TestCase):
+    """Test case for the AuthorCreate view (Created as Challenge)."""
+
+    def setUp(self):
+        # Create a user
+        test_user = User.objects.create_user(username='testuser', password='1X<ISRUkw+tuK')
+
+        permission = Permission.objects.get(name='Staff user')
+        test_user.user_permissions.add(permission)
+        test_user.save()
+        
+    def test_redirect_if_not_logged_in(self):
+        response = self.client.get(reverse('author-create'))
+        self.assertEqual(response.status_code, 302)
+        
+    def test_logged_in_to_create_user(self):
+        login = self.client.login(username='testuser', password='1X<ISRUkw+tuK')
+        response = self.client.get(reverse('author-create'))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(str(response.context['user']), 'testuser')
+        
+    def test_to_redrect_create_author_view(self):
+        login = self.client.login(username='testuser', password='1X<ISRUkw+tuK')
+        self.assertTrue(login)
+        response = self.client.get(reverse('author-create'), follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'catlog/author_form.html')
